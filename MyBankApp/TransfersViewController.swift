@@ -19,6 +19,34 @@ class TransfersViewController: UIViewController {
     @IBOutlet weak var moneyStatusLabel: UILabel!
     
     
+    
+    @IBAction func changedCardNumber() {
+        guard let cardNumberString = cardNumberTextField.text,
+            !cardNumberString.isEmpty else {
+                cardNumberStatusLabel.text = "Введите номер карты"
+                return
+        }
+        
+        //после  guard  не открываются скобки, сразу переходим к else
+        guard let cardNumberInt = Int(cardNumberString) else {
+            cardNumberStatusLabel.text = "Нужно ввести число"
+            return
+        }
+        
+        if cardNumberInt <= 0 {
+            cardNumberStatusLabel.text = "Номер карты  не может быть отрицательным"
+        } else if cardNumberString.characters.count < 16 {
+            cardNumberStatusLabel.text = "Номер карты слишком короткий"
+        } else if cardNumberString.characters.count > 16 {
+            cardNumberStatusLabel.text = "Номер карты слишком длинный"
+        } else if cardNumberString.characters.count == 16 {
+            cardNumberStatusLabel.text = "Номер карты введен"
+        }
+        
+        
+    }
+    
+    
     @IBAction func sendMoney(_ sender: UIButton) {
         
         if let moneyString = moneyTextField.text,

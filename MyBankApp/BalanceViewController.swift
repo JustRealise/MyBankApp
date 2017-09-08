@@ -18,12 +18,21 @@ class BalanceViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        balanceTextField.text = "\(LocalData.balance) руб."
+        updateUI()
     }
     
     
     
     
+    @IBAction func addSomeMoney(_ sender: UIButton) {
+        LocalData.balance += 50_000 // то же самое что 50000
+        UserDefaults.standard.set(LocalData.balance, forKey: "balance")
+        updateUI()
+    }
+    
+    func updateUI() {
+        balanceTextField.text = "\(LocalData.balance) руб."
+    }
     
     
     override func viewDidLoad() {
